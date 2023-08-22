@@ -31,7 +31,7 @@ variable "container_definitions" {
       type = string
       options = object({
         config-file-type        = string
-        enable-ecs-log-metadata = bool
+        enable-ecs-log-metadata = string
         config-file-value       = string
       })
     }))
