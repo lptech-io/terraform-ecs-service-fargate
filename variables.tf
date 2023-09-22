@@ -124,7 +124,7 @@ variable "target_group_arn" {
 variable "task_role_extra_allowed_principals" {
   default = {
     aws = []
-    service = []
+    services = []
   }
   description = "Extra allowed principals for ECS task role"
   type = object({
