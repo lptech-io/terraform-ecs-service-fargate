@@ -121,6 +121,17 @@ variable "target_group_arn" {
   type        = string
 }
 
+variable "task_role_extra_assume_role_permission" {
+  default = []
+  description = "Extra policy statement to attach to ecs task role"
+  type = list(object({
+    Sid       = optional(string, "")
+    Action    = list(string)
+    Effect    = string
+    Principal = object({})
+  }))
+}
+
 variable "task_role_policies" {
   default     = []
   description = "AWS IAM policies that the application might need"
