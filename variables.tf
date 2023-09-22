@@ -128,7 +128,10 @@ variable "task_role_extra_assume_role_permission" {
     Sid       = optional(string, "")
     Action    = list(string)
     Effect    = string
-    Principal = object({})
+    Principal = object({
+      AWS = optional(list(string))
+      Service = optional(list(string))
+    })
   }))
 }
 
