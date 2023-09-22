@@ -129,7 +129,7 @@ variable "task_role_extra_allowed_principals" {
   description = "Extra allowed principals for ECS task role"
   type = object({
     aws = optional(list(string))
-    service = optional(list(string))
+    services = optional(list(string))
   })
 }
 
