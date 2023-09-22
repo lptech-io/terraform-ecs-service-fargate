@@ -121,18 +121,16 @@ variable "target_group_arn" {
   type        = string
 }
 
-variable "task_role_extra_assume_role_permission" {
-  default = []
-  description = "Extra policy statement to attach to ecs task role"
-  type = list(object({
-    Sid       = optional(string, "")
-    Action    = list(string)
-    Effect    = string
-    Principal = object({
-      AWS = optional(list(string))
-      Service = optional(list(string))
-    })
-  }))
+variable "task_role_extra_allowed_principals" {
+  default = {
+    aws = []
+    service = []
+  }
+  description = "Extra allowed principals for ECS task role"
+  type = object({
+    aws = optional(list(string))
+    service = optional(list(string))
+  })
 }
 
 variable "task_role_policies" {

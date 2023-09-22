@@ -148,15 +148,16 @@ resource "aws_iam_role" "task_role" {
   name = "${var.service_name}-task-role"
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
-    Statement = concat([
+    Statement = [
       {
         Action = "sts:AssumeRole"
         Effect = "Allow"
         Principal = {
-          Service = "ecs-tasks.amazonaws.com"
+          Service = concat(["ecs-tasks.amazonaws.com"], var.task_role_extra_allowed_principal.services)
+          AWS = var.task_role_extra_allowed_principal.aws
         }
       },
-    ], var.task_role_extra_assume_role_permission)
+    ]
   })
   dynamic "inline_policy" {
     for_each = var.task_role_policies
