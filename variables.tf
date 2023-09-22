@@ -127,9 +127,10 @@ variable "task_role_policies" {
   type = list(object({
     name = string
     statement = list(object({
-      Action   = list(string)
-      Effect   = string
-      Resource = list(string)
+      Action    = list(string)
+      Effect    = string
+      Principal = optional(object())
+      Resource  = optional(list(string))
     }))
   }))
 }

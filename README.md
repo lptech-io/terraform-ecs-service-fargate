@@ -45,7 +45,7 @@ No modules.
 | <a name="input_subnets"></a> [subnets](#input\_subnets) | List of subnets used by the ECS service | `list(string)` | n/a | yes |
 | <a name="input_target_group_arn"></a> [target\_group\_arn](#input\_target\_group\_arn) | Target group ARN | `string` | n/a | yes |
 | <a name="input_task_definition"></a> [task\_definition](#input\_task\_definition) | Task definition configuration block | <pre>object({<br>    entrypoint_container_name = string<br>    entrypoint_container_port = number<br>  })</pre> | n/a | yes |
-| <a name="input_task_role_policies"></a> [task\_role\_policies](#input\_task\_role\_policies) | AWS IAM policies that the application might need | <pre>list(object({<br>    name = string<br>    statement = list(object({<br>      Action   = list(string)<br>      Effect   = string<br>      Resource = list(string)<br>    }))<br>  }))</pre> | `[]` | no |
+| <a name="input_task_role_policies"></a> [task\_role\_policies](#input\_task\_role\_policies) | AWS IAM policies that the application might need | <pre>list(object({<br>    name = string<br>    statement = list(object({<br>      Action    = list(string)<br>      Effect    = string<br>      Principal = optional(object())<br>      Resource  = optional(list(string))<br>    }))<br>  }))</pre> | `[]` | no |
 | <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | The VPC ID | `string` | n/a | yes |
 
 ## Outputs
