@@ -129,7 +129,7 @@ variable "task_role_policies" {
     statement = list(object({
       Action    = list(string)
       Effect    = string
-      Principal = optional(object)
+      Principal = optional(object({}))
       Resource  = optional(list(string))
     }))
   }))
