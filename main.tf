@@ -153,7 +153,7 @@ resource "aws_iam_role" "task_role" {
         Action = "sts:AssumeRole"
         Effect = "Allow"
         Principal = {
-          Service = concat(["ecs-tasks.amazonaws.com"], var.task_role_extra_allowed_principals.services)
+          Service = try(concat(["ecs-tasks.amazonaws.com"], var.task_role_extra_allowed_principals.services), ["ecs-tasks.amazonaws.com"])
           AWS = var.task_role_extra_allowed_principals.aws
         }
       },
