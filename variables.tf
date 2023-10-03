@@ -75,6 +75,12 @@ variable "execution_role_policies" {
   }))
 }
 
+variable "extra_target_groups" {
+  default = []
+  description = "Extra target groups, if needed"
+  type = list(string)
+}
+
 variable "health_check_grace_period_in_seconds" {
   description = "Grace period to start to control health check on task definition"
   type        = number

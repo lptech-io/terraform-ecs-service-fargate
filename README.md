@@ -38,6 +38,7 @@ No modules.
 | <a name="input_cpu"></a> [cpu](#input\_cpu) | The CPU units | `number` | `1024` | no |
 | <a name="input_ecr_repository_arns"></a> [ecr\_repository\_arns](#input\_ecr\_repository\_arns) | The ECR repository ARNs | `list(string)` | `[]` | no |
 | <a name="input_execution_role_policies"></a> [execution\_role\_policies](#input\_execution\_role\_policies) | AWS IAM policies that ECS might need | <pre>list(object({<br>    name = string<br>    statement = list(object({<br>      Action   = list(string)<br>      Effect   = string<br>      Resource = list(string)<br>    }))<br>  }))</pre> | `[]` | no |
+| <a name="input_extra_target_groups"></a> [extra\_target\_groups](#input\_extra\_target\_groups) | Extra target groups, if needed | `list(string)` | `[]` | no |
 | <a name="input_health_check_grace_period_in_seconds"></a> [health\_check\_grace\_period\_in\_seconds](#input\_health\_check\_grace\_period\_in\_seconds) | Grace period to start to control health check on task definition | `number` | n/a | yes |
 | <a name="input_load_balancer_arn"></a> [load\_balancer\_arn](#input\_load\_balancer\_arn) | Load balancer ARN | `string` | n/a | yes |
 | <a name="input_memory"></a> [memory](#input\_memory) | The memory size in megabytes | `number` | `2048` | no |

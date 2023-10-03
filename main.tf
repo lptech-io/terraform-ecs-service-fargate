@@ -36,6 +36,14 @@ resource "aws_ecs_service" "service" {
     container_name   = var.task_definition.entrypoint_container_name
     container_port   = var.task_definition.entrypoint_container_port
   }
+  dynamic "load_balancer" {
+    for_each = var.extra_target_groups
+    content {
+      target_group_arn = load_balancer.value
+      container_name = var.task_definition.entrypoint_container_name
+      container_port = var.task_definition.entrypoint_container_port
+    }
+  }
   network_configuration {
     subnets          = var.subnets
     security_groups  = [aws_security_group.security_group.id]
