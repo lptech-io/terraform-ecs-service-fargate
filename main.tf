@@ -28,6 +28,7 @@ resource "aws_ecs_service" "service" {
   }
   deployment_minimum_healthy_percent = 100
   deployment_maximum_percent         = 200
+  enable_ecs_managed_tags            = true
   force_new_deployment               = true
   health_check_grace_period_seconds  = var.health_check_grace_period_in_seconds
   launch_type                        = "FARGATE"
@@ -49,7 +50,7 @@ resource "aws_ecs_service" "service" {
     security_groups  = [aws_security_group.security_group.id]
     assign_public_ip = false
   }
-  propagate_tags  = "TASK_DEFINITION"
+  propagate_tags  = "SERVICE"
   task_definition = aws_ecs_task_definition.task_definition.arn
   lifecycle {
     ignore_changes = [desired_count]
