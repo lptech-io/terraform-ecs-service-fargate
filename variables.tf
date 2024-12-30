@@ -76,9 +76,9 @@ variable "execution_role_policies" {
 }
 
 variable "extra_target_groups" {
-  default = []
+  default     = []
   description = "Extra target groups, if needed"
-  type = list(string)
+  type        = list(string)
 }
 
 variable "health_check_grace_period_in_seconds" {
@@ -129,12 +129,12 @@ variable "target_group_arn" {
 
 variable "task_role_extra_allowed_principals" {
   default = {
-    aws = []
+    aws      = []
     services = []
   }
   description = "Extra allowed principals for ECS task role"
   type = object({
-    aws = optional(list(string))
+    aws      = optional(list(string))
     services = optional(list(string))
   })
 }
@@ -145,9 +145,9 @@ variable "task_role_policies" {
   type = list(object({
     name = string
     statement = list(object({
-      Action    = list(string)
-      Effect    = string
-      Resource  = list(string)
+      Action   = list(string)
+      Effect   = string
+      Resource = list(string)
     }))
   }))
 }

@@ -5,12 +5,12 @@ resource "aws_security_group" "security_group" {
 }
 
 resource "aws_security_group_rule" "permit_outbound_traffic" {
-  type = "egress"
-  description = "Permit access to 443 for ECR access"
-  cidr_blocks = ["0.0.0.0/0"]
-  from_port = 443
-  to_port = 443
-  protocol = "tcp"
+  type              = "egress"
+  description       = "Permit access to 443 for ECR access"
+  cidr_blocks       = ["0.0.0.0/0"]
+  from_port         = 443
+  to_port           = 443
+  protocol          = "tcp"
   security_group_id = aws_security_group.security_group.id
 }
 
@@ -41,8 +41,8 @@ resource "aws_ecs_service" "service" {
     for_each = var.extra_target_groups
     content {
       target_group_arn = load_balancer.value
-      container_name = var.task_definition.entrypoint_container_name
-      container_port = var.task_definition.entrypoint_container_port
+      container_name   = var.task_definition.entrypoint_container_name
+      container_port   = var.task_definition.entrypoint_container_port
     }
   }
   network_configuration {
@@ -110,10 +110,6 @@ resource "aws_iam_role" "execution_role" {
       },
     ]
   })
-  managed_policy_arns = [
-    "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceRole",
-    "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy",
-  ]
   dynamic "inline_policy" {
     for_each = var.execution_role_policies
 
@@ -153,6 +149,16 @@ resource "aws_iam_role" "execution_role" {
   }
 }
 
+resource "aws_iam_role_policy_attachment" "execution_role_ec2_container_service_policy" {
+  role       = aws_iam_role.execution_role.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceRole"
+}
+
+resource "aws_iam_role_policy_attachment" "execution_role_ecs_task_execution_policy" {
+  role       = aws_iam_role.execution_role.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
+}
+
 resource "aws_iam_role" "task_role" {
   name = "${var.service_name}-task-role"
   assume_role_policy = jsonencode({
@@ -163,7 +169,7 @@ resource "aws_iam_role" "task_role" {
         Effect = "Allow"
         Principal = {
           Service = try(concat(["ecs-tasks.amazonaws.com"], var.task_role_extra_allowed_principals.services), ["ecs-tasks.amazonaws.com"])
-          AWS = var.task_role_extra_allowed_principals.aws
+          AWS     = var.task_role_extra_allowed_principals.aws
         }
       },
     ]
@@ -178,7 +184,9 @@ resource "aws_iam_role" "task_role" {
       })
     }
   }
-  managed_policy_arns = [
-    "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy",
-  ]
+}
+
+resource "aws_iam_role_policy_attachment" "task_role_ecs_task_execution_policy" {
+  role       = aws_iam_role.task_role.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
