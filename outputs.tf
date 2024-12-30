@@ -2,6 +2,10 @@ output "cluster_arn" {
   value = aws_ecs_service.service.cluster
 }
 
+output "execution_role_arn" {
+  value = aws_iam_role.execution_role.arn
+}
+
 output "security_group_id" {
   description = "The application security group id"
   value       = aws_security_group.security_group.id
@@ -30,4 +34,8 @@ output "scalable_target_dimension" {
 output "scalable_target_id" {
   description = "The scalable target id"
   value       = aws_appautoscaling_target.ecs_target.resource_id
+}
+
+output "task_role_arn" {
+  value = aws_iam_role.task_role.arn
 }

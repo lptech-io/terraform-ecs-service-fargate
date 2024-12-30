@@ -38,13 +38,13 @@ data "aws_iam_policy_document" "execution_role_policy" {
   }
 }
 
-
 resource "aws_iam_role" "execution_role" {
   name               = "${var.service_name}-execution-role"
   assume_role_policy = data.aws_iam_policy_document.execution_role_assume_policy.json
 }
 
 resource "aws_iam_role_policy" "execution_role_custom_policy" {
+  name   = "CustomPolicy"
   role   = aws_iam_role.execution_role.id
   policy = data.aws_iam_policy_document.execution_role_policy.json
 }
@@ -91,6 +91,7 @@ resource "aws_iam_role" "task_role" {
 }
 
 resource "aws_iam_role_policy" "task_role_custom_policy" {
+  name   = "CustomPolicy"
   role   = aws_iam_role.task_role.id
   policy = data.aws_iam_policy_document.task_role_policy.json
 }

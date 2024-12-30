@@ -64,10 +64,12 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_cluster_arn"></a> [cluster\_arn](#output\_cluster\_arn) | n/a |
+| <a name="output_execution_role_arn"></a> [execution\_role\_arn](#output\_execution\_role\_arn) | n/a |
 | <a name="output_scalable_target_dimension"></a> [scalable\_target\_dimension](#output\_scalable\_target\_dimension) | The scalable target dimension |
 | <a name="output_scalable_target_id"></a> [scalable\_target\_id](#output\_scalable\_target\_id) | The scalable target id |
 | <a name="output_scalable_target_namespace"></a> [scalable\_target\_namespace](#output\_scalable\_target\_namespace) | The scalable target namespace |
 | <a name="output_security_group_id"></a> [security\_group\_id](#output\_security\_group\_id) | The application security group id |
 | <a name="output_service_arn"></a> [service\_arn](#output\_service\_arn) | Service ARN |
 | <a name="output_service_name"></a> [service\_name](#output\_service\_name) | Service name |
+| <a name="output_task_role_arn"></a> [task\_role\_arn](#output\_task\_role\_arn) | n/a |
 <!-- END_TF_DOCS -->
