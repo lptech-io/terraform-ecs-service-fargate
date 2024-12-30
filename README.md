@@ -25,11 +25,17 @@ No modules.
 | [aws_ecs_task_definition.task_definition](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_task_definition) | resource |
 | [aws_iam_role.execution_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
 | [aws_iam_role.task_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
+| [aws_iam_role_policy.execution_role_custom_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy) | resource |
+| [aws_iam_role_policy.task_role_custom_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy) | resource |
 | [aws_iam_role_policy_attachment.execution_role_ec2_container_service_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.execution_role_ecs_task_execution_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.task_role_ecs_task_execution_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_security_group.security_group](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
 | [aws_security_group_rule.permit_outbound_traffic](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
+| [aws_iam_policy_document.execution_role_assume_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [aws_iam_policy_document.execution_role_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [aws_iam_policy_document.task_role_assume_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [aws_iam_policy_document.task_role_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 
 ## Inputs
 
@@ -49,8 +55,8 @@ No modules.
 | <a name="input_subnets"></a> [subnets](#input\_subnets) | List of subnets used by the ECS service | `list(string)` | n/a | yes |
 | <a name="input_target_group_arn"></a> [target\_group\_arn](#input\_target\_group\_arn) | Target group ARN | `string` | n/a | yes |
 | <a name="input_task_definition"></a> [task\_definition](#input\_task\_definition) | Task definition configuration block | <pre>object({<br>    entrypoint_container_name = string<br>    entrypoint_container_port = number<br>  })</pre> | n/a | yes |
-| <a name="input_task_role_extra_allowed_principals"></a> [task\_role\_extra\_allowed\_principals](#input\_task\_role\_extra\_allowed\_principals) | Extra allowed principals for ECS task role | <pre>object({<br>    aws = optional(list(string))<br>    services = optional(list(string))<br>  })</pre> | <pre>{<br>  "aws": [],<br>  "services": []<br>}</pre> | no |
-| <a name="input_task_role_policies"></a> [task\_role\_policies](#input\_task\_role\_policies) | AWS IAM policies that the application might need | <pre>list(object({<br>    name = string<br>    statement = list(object({<br>      Action    = list(string)<br>      Effect    = string<br>      Resource  = list(string)<br>    }))<br>  }))</pre> | `[]` | no |
+| <a name="input_task_role_extra_allowed_principals"></a> [task\_role\_extra\_allowed\_principals](#input\_task\_role\_extra\_allowed\_principals) | Extra allowed principals for ECS task role | <pre>object({<br>    aws      = optional(list(string))<br>    services = optional(list(string))<br>  })</pre> | <pre>{<br>  "aws": [],<br>  "services": []<br>}</pre> | no |
+| <a name="input_task_role_policies"></a> [task\_role\_policies](#input\_task\_role\_policies) | AWS IAM policies that the application might need | <pre>list(object({<br>    name = string<br>    statement = list(object({<br>      Action   = list(string)<br>      Effect   = string<br>      Resource = list(string)<br>    }))<br>  }))</pre> | `[]` | no |
 | <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | The VPC ID | `string` | n/a | yes |
 
 ## Outputs
