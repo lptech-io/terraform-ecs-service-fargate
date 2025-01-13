@@ -75,6 +75,7 @@ data "aws_iam_policy_document" "task_role_assume_policy" {
 }
 
 data "aws_iam_policy_document" "task_role_policy" {
+  count = lenght(var.task_role_policies) > 0 ? 1 : 0
   dynamic "statement" {
     for_each = { for key, value in var.task_role_policies[0].statement : key => value }
     content {
@@ -91,9 +92,10 @@ resource "aws_iam_role" "task_role" {
 }
 
 resource "aws_iam_role_policy" "task_role_custom_policy" {
+  count  = lenght(var.task_role_policies) > 0 ? 1 : 0
   name   = "CustomPolicy"
   role   = aws_iam_role.task_role.id
-  policy = data.aws_iam_policy_document.task_role_policy.json
+  policy = data.aws_iam_policy_document.task_role_policy[0].json
 }
 
 resource "aws_iam_role_policy_attachment" "task_role_ecs_task_execution_policy" {
